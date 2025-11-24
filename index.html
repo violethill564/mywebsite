@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Увлекательный Английский / Engaging ESL </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #8A2BE2;
+            --light-purple: #B19CD9;
+            --yellow: #FFD700;
+            --light-yellow: #FFF8DC;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--light-yellow) 0%, var(--white) 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--purple) 0%, var(--light-purple) 100%);
+            color: var(--white);
+            padding: 10px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--yellow);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+			font-size: 1.2rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--yellow);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--yellow);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%238A2BE2" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,202.7C1248,213,1344,171,1392,149.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--purple);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--purple), var(--light-purple));
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--purple);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--yellow);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 40%;
+            object-fit: cover;
+            border: 5px solid var(--yellow);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+			position: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 15px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border-top: 5px solid var(--purple);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--purple);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--purple);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--yellow);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular::before {
+            content: '🔥 Популярный';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--yellow);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .review-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .review-stars {
+            color: var(--yellow);
+            margin-top: 5px;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--purple);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--purple);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, var(--purple), var(--light-purple));
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .contact-info {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+            margin-top: 50px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--purple);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background: linear-gradient(90deg, var(--purple) 0%, var(--light-purple) 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--yellow);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--yellow);
+            color: var(--purple);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">📚</div>
+                    <div class="logo-text">
+                        <h1>Увлекательный Английский | Engaging ESL</h1>
+                        <p>Учитель и репетитор</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">Обо мне </a></li>
+                        <li><a href="#lessons">Как проходят уроки </a></li>
+                        <li><a href="#services">Услуги </a></li>
+                        <li><a href="#pricing">Цены </a></li>
+                        <li><a href="#reviews">Отзывы </a></li>
+                        <li><a href="#contact">Контакты </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+ <img src="site/images/banner3.jpg" alt="Специальное предложение" style="width:100%; max-height:300px; object-fit:cover;">
+    <div class="banner-content">
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Английский язык с комфортом для общения, работы и жизни 🌍</h2>
+                <p>Индивидуальные занятия для детей от 6 лет, подростков и взрослых. Подготовка к ОГЭ, разговорная язык, обучение чтению и многое другое.</p>
+                <a href="#contact" class="cta-button">Записаться на урок 🚀</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Обо мне 👩‍🏫</h2>
+			<div style="display: flex; justify-content: center;">
+                    <img src="site/images/pfp.jpg" alt="Кристина - репетитор английского" class="profile-img">
+			</div>		
+                </div>
+            <div class="about-content">
+                <div class="about-text" style="text-align: center;">
+                    <p> Здравствуйте! Меня зовут Кристина, и я преподаю английский уже 7 лет 🎓</p>
+                    <p> Я окончила ВГУ с красным дипломом. За годы работы я помогла: </p>
+					<p> 🌟 Детям от 3 до 6 лет привыкнуть к беглой английской речи, подготовиться к школе </p>
+					<p> 🌟 Ребятам от 7 до 10 лет полюбить занятия языком, преодолеть страх и не отставать в школе </p>
+					<p> 🌟 Подросткам погрузиться в язык на основе интересов и подготовиться к ОГЭ на высокие баллы </p>
+                    <p> 💫 Мои занятия основаны на коммуникативном подходе с учетом особенностей каждого ученика </p>
+                    <p> Сама я регулярно прохожу курсы повышения квалификации, участвую в научных конференциях и разрабатываю материалы и курсы для преподавателей 📚</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Индивидуальный подход</h3>
+                            <p> Подбираю пособия и программу под нужды и интересы </p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">📈</div>
+                            <h3>Эффективные и полезно</h3>
+                            <p>Прогресс в коммуникации уже после первых уроков</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">💡</div>
+                            <h3>Коммуникативный метод</h3>
+                            <p>Ориентируемся на актуальное и используемое, никаких слов ради слов</p>
+                        </div>
+						<div class="feature-item">
+                            <div class="feature-icon">🗨️</div>
+                            <h3>Занятия на языке</h3>
+                            <p>Учимся воспринимать информацию сразу на английском</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lessons" class="section" style="background-color: var(--light-yellow);">
+        <div class="container">
+            <h2 class="section-title">Как проходят уроки 🎓</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Онлайн формат</h3>
+                    <p>Удобные занятия из дома через Zoom с интерактивной доской и материалами</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Индивидуальные занятия</h3>
+                    <p>Или в мини-группах от 2-х до 4-х человек</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📚</div>
+                    <h3>Аутентичные материалы</h3>
+                    <p>Признанные учебники в сочетании с авторскими яркими заданиями, популярными видео и тем, что вам интересно</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🗣️</div>
+                    <h3>Коммуникативная практика</h3>
+                    <p>Работаем с говорением, чтением, слушанием и письмом</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📝</div>
+                    <h3>Домашние задания</h3>
+                    <p>В зависимости от целей и нагрузки, возможен и формат без домашних заданий</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Регулярная обратная связь</h3>
+                    <p>Фидбек и закрепление пройденного, рекомендации дополнительных материалов </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Мои услуги 💼</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Подготовка к экзаменам</h3>
+                    <p>Эффективная подготовка к ОГЭ, олимпиадам</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h3>Разговорный по фильмам, видео, аниме</h3>
+                    <p>Осваивайте язык на примере того, что вас действительно увлекает</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👨‍💼</div>
+                    <h3>Деловой английский</h3>
+                    <p>Специализированные курсы для формального общения, презентаций и переговоров</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👶</div>
+                    <h3>Подготовка к школе</h3>
+                    <p>Увлекательные и красочные задания для детей, чтение сказок и знакомство с базовым английским</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3>Английский для общения</h3>
+                    <p>Самое необходимое для комфортных поездок за границу в реальных ситуациях</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📝</div>
+                    <h3>Помощь с домашним заданием</h3>
+                    <p>Постепенный переход от разбора к повышению уровня</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section" style="background-color: var(--light-yellow);">
+        <div class="container">
+            <h2 class="section-title">Цены занятий 💰</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>⏱️ 45 минут</h3>
+                    <div class="price">1000 ₽ <span></span></div>
+                    <ul style="text-align: left; margin: 20px 0;">
+                        <li>✅ Оптимально для дошкольников и детей с дефицитом внимания</li>
+                        <li>✅ Разбираем самое важное</li>
+                        <li>✅ Плавный переход к полноценному часу</li>
+                    </ul>
+                    <a href="#contact" class="cta-button" style="display: inline-block; padding: 10px 25px; font-size: 0.9rem;">Записаться</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <h3>⏱️ 60 минут</h3>
+                    <div class="price">1200 ₽ <span>/ занятие</span></div>
+                    <ul style="text-align: left; margin: 20px 0;">
+                        <li>✅ 8 занятий в месяц</li>
+                        <li>✅ Индивидуальная программа</li>
+                        <li>✅ Все материалы включены</li>
+                        <li>✅ Регулярная обратная связь</li>
+                    </ul>
+                    <a href="#contact" class="cta-button" style="display: inline-block; padding: 10px 25px; font-size: 0.9rem;">Выбрать</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Интенсивный курс</h3>
+                    <div class="price">1500 ₽ <span>/ занятие</span></div>
+                    <ul style="text-align: left; margin: 20px 0;">
+                        <li>✅ Подготовка к ОГЭ</li>
+                        <li>✅ Ускоренная программа</li>
+                        <li>✅ Дополнительные материалы</li>
+                        <li>✅ Поддержка между уроками</li>
+                        <li>⏱️ 60 минут</li>
+                    </ul>
+                    <a href="#contact" class="cta-button" style="display: inline-block; padding: 10px 25px; font-size: 0.9rem;">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section">
+        <div class="container">
+            <h2 class="section-title">Отзывы о занятиях ⭐</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <h3>Ирина</h3>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Кристина Валерьевна - замечательный педагог. Ребенок изучает английский с большим удовольствием, всем рекомендую!"</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <h3>Татьяна</h3>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Дочери 5 лет. С прошлого года начала изучать английский язык. На занятия идет с удовольствием, что очень важно для детей такого возраста. Уже сейчас мы видим результаты занятий. Хочется сказать большое спасибо Кристине Валерьевне за знания и доброту."</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <h3>Екатерина</h3>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Кристина Валерьевна - лучший учитель. Занятия интересные, учимся по разделам, есть и занятия на аудирование, и на чтение, работа с текстами и много игр. С ними полюбила английский."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="background-color: var(--light-yellow);">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь со мной 📞</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Ваш email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Ваш телефон</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control" rows="5" placeholder="Расскажите о ваших целях в изучении английского..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить заявку ✉️</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Телефон</h3>
+                        <p>+7 (900) 958-98-14</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>5428381@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>📧 Email: 5428381@gmail.com</p>
+                    <p>📞 Телефон: +7 (900) 958-98-14</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Часы работы</h3>
+                    <p>🕘 Пн-Пт: 9:00 - 20:00</p>
+                    <p>🕙 Сб: 10:00 - 16:00</p>
+                    <p>🕛 Вс: выходной</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Социальные сети</h3>
+                    <div class="social-links">
+                        <a href="https://vk.com/nightmare_12" class="social-icon"><i class="fab fa-vk"></i></a>
+                        <a href="https://t.me/kerhariel" class="social-icon"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; Увлекательный Английский. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Я свяжусь с вами в ближайшее время. 📩');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
